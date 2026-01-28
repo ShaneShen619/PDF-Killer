@@ -1,6 +1,2 @@
 Flask==3.1.2
 PyPDF2
-pandas
-openpyxl
-xlrd
-xhtml2pdf
