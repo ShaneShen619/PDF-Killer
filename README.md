@@ -29,7 +29,7 @@ PDF-Killer/
 ### 安装依赖
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### 方式一：命令行使用
@@ -48,7 +48,7 @@ search_keyword = '你的关键词'
 3. 运行脚本：
 
 ```bash
-python searchpdf.py
+python3 searchpdf.py
 ```
 
 4. 搜索结果将保存到桌面：`汇总搜索结果_关键词.pdf`
@@ -59,7 +59,7 @@ python searchpdf.py
 
 ```bash
 cd web_app
-python app.py
+python3 app.py
 ```
 
 2. 打开浏览器访问：`http://127.0.0.1:5001`
