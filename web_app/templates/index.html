@@ -4,96 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF 关键词提取器</title>
+    <!-- Google Fonts: Jost (heading) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jost:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #4a90e2;
-            --bg-color: #f5f7fa;
-            --card-bg: #ffffff;
+            /* ACC ClubHub Color Palette — Modern Cycling Premium */
+            --color-bg-canvas: #FFFFFF;
+            --color-bg-secondary: #F7F7F8;
+            --color-primary: #1A1A1A;
+            --color-secondary: #C62828;
+            --color-accent: #C62828;
+            --color-accent-dark: #a81f1f;
+            --color-text-main: #111111;
+            --color-text-secondary: #6B7280;
+            --color-border: #E5E7EB;
+            --color-border-strong: #D1D5DB;
+
+            /* Typography */
+            --font-heading: 'Jost', 'Futura', sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+
+            /* Border Radius */
+            --radius-aero: 12px;
+            --radius-btn: 8px;
+            --radius-card: 16px;
+
+            /* Shadows */
+            --shadow-brutal: 6px 6px 0px var(--color-primary);
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: var(--font-body);
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            color: #333;
+            padding: 1rem;
         }
+
         .container {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: var(--color-bg-canvas);
+            padding: 2.5rem;
+            border: 2px solid var(--color-border-strong);
+            border-radius: var(--radius-aero);
             width: 100%;
             max-width: 500px;
+            /* Rapha-inspired modern transition and shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-brutal);
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
             text-align: center;
         }
-        h1 {
-            margin-bottom: 1.5rem;
-            color: #2c3e50;
-        }
+
         .form-group {
             margin-bottom: 1.5rem;
             text-align: left;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-primary);
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            box-sizing: border-box; /* 确保 padding 不会撑大宽度 */
-        }
+
+        input[type="text"],
         input[type="file"] {
-            display: block;
             width: 100%;
-            padding: 10px;
-            border: 1px dashed #ddd;
-            border-radius: 6px;
-            background: #fafafa;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 24px;
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-btn);
             font-size: 16px;
-            border-radius: 6px;
+            font-family: var(--font-body);
+            background-color: var(--color-bg-canvas);
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, outline 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        input[type="file"] {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+
+        /* Customize file input button */
+        ::file-selector-button {
+            font-family: var(--font-body);
+            font-weight: 500;
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border-strong);
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin-right: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        ::file-selector-button:hover {
+            background-color: #e5e5e5;
+        }
+
+        button.submit-btn {
+            background-color: var(--color-accent);
+            color: white;
+            border: 2px solid var(--color-accent);
+            padding: 14px 24px;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: var(--radius-btn);
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #357abd;
-        }
-        .status {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
             margin-top: 1rem;
+        }
+
+        button.submit-btn:hover:not(:disabled) {
+            background-color: var(--color-accent-dark);
+            border-color: var(--color-accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px var(--color-primary);
+        }
+        
+        button.submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            background-color: var(--color-text-secondary);
+            border-color: var(--color-text-secondary);
+            box-shadow: none;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 1.5rem;
             font-size: 0.9rem;
-            color: #666;
+            color: var(--color-text-secondary);
+            text-align: center;
             min-height: 1.2em;
         }
+
         .spinner {
             display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 2px solid rgba(0,0,0,0.1);
-            border-left-color: var(--primary-color);
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-left-color: #ffffff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-right: 5px;
+            margin-right: 8px;
             vertical-align: middle;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .hidden { display: none; }
+
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
     </style>
 </head>
 <body>
@@ -112,7 +200,7 @@
             <input type="text" id="keyword" name="keyword" placeholder="例如：合同、Shishuai" required>
         </div>
 
-        <button type="submit" id="submitBtn">开始提取并下载</button>
+        <button type="submit" id="submitBtn" class="submit-btn">开始提取并下载</button>
     </form>
 
     <div class="status" id="statusMessage"></div>
@@ -124,18 +212,15 @@
     const status = document.getElementById('statusMessage');
 
     form.onsubmit = function() {
-        // 简单的交互反馈
         btn.disabled = true;
         btn.innerHTML = '<span class="spinner"></span> 正在处理中...';
         status.textContent = '正在上传文件并搜索，请稍候...';
         
-        // 注意：由于是普通表单提交下载，页面不会自动刷新恢复按钮状态
-        // 这里只是做一个简单的视觉反馈
         setTimeout(() => {
             btn.disabled = false;
             btn.textContent = '开始提取并下载';
             status.textContent = '如果不自动下载，请检查文件是否包含关键词。';
-        }, 5000); // 5秒后恢复，假设处理很快
+        }, 5000);
     };
 </script>
 
