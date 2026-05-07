@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF 关键词提取器</title>
+    <title>PDFilter.</title>
     <!-- Google Fonts: Jost (heading) + Inter (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +41,7 @@
             background-color: var(--color-bg-secondary);
             color: var(--color-text-main);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -182,12 +183,52 @@
             0% { transform: rotate(0deg); } 
             100% { transform: rotate(360deg); } 
         }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+
+        .footer-links a:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📄 PDF 关键词提取器</h1>
+    <h1>📄 PDFilter.</h1>
     
     <form id="uploadForm" action="/process" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -205,6 +246,15 @@
 
     <div class="status" id="statusMessage"></div>
 </div>
+
+<footer class="footer">
+    <div class="footer-links">
+        <a href="mailto:zhikuan.shen@example.com" title="Email" target="_blank" rel="noopener noreferrer">✉️</a>
+        <a href="https://www.linkedin.com/in/zhikuan-shen-844b32348/" title="LinkedIn" target="_blank" rel="noopener noreferrer">🔗</a>
+        <a href="https://github.com/ShaneShen619/PDF-Killer" title="GitHub" target="_blank" rel="noopener noreferrer">🐙</a>
+    </div>
+    <p>&copy; 2026 Zhikuan Shen. All rights reserved.</p>
+</footer>
 
 <script>
     const form = document.getElementById('uploadForm');
